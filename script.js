@@ -2,7 +2,7 @@
 const CONFIG = {
   coupleName: "You & Her",
   yourName: "[Boo boo]",
-  herName: "[HER NAME]",
+  herName: "[Bae]",
   anniversaryDate: "2024-09-25T00:00:00",
   movieDate: "[Date]",
   movieTime: "[Time]"

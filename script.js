@@ -1,7 +1,7 @@
 /* ============ EDIT ME: CONFIG ============ */
 const CONFIG = {
   coupleName: "You & Her",
-  yourName: "[YOUR NAME]",
+  yourName: "[Boo boo]",
   herName: "[HER NAME]",
   anniversaryDate: "2024-09-25T00:00:00",
   movieDate: "[Date]",
@@ -92,9 +92,14 @@ function openModal(i, filter){
       <p>${m.desc}</p>
     </div>`;
   document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 document.getElementById('modal').addEventListener('click', e=>{ if(e.target.id==='modal') closeModal(); });
+window.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModal(); });
 
 /* letter */
 const LETTER_LINES = [
@@ -250,22 +255,53 @@ addParticles('letter',{count:13, dark:true});
 addParticles('surprise',{count:16, dark:true});
 addParticles('opening',{count:9});
 
-/* scroll: reveal, progress, nav */
+/* scroll: reveal, progress, nav, section highlighting */
 const io = new IntersectionObserver(entries=>{
   entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in'); });
-},{threshold:.15});
+},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* nav section active highlight */
+const navLinks = document.querySelectorAll('nav a');
+const sectionObserver = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const id = en.target.getAttribute('id');
+      navLinks.forEach(link=>{
+        const href = link.getAttribute('href').replace('#','');
+        link.classList.toggle('active', href === id);
+      });
+    }
+  });
+},{threshold:0.3});
+['story','memories','letter','surprise'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) sectionObserver.observe(el);
+});
+
 let lastScroll = 0;
+let scrollTimer = null;
 window.addEventListener('scroll', ()=>{
   const h = document.documentElement;
   const pct = (h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
-  document.getElementById('progress').style.width = pct+'%';
+  const progressEl = document.getElementById('progress');
+  if(progressEl) progressEl.style.width = pct+'%';
+  
   const nav = document.getElementById('nav');
-  const past = h.scrollTop > window.innerHeight*0.6;
+  const past = h.scrollTop > window.innerHeight*0.4;
   const goingUp = h.scrollTop < lastScroll;
-  if(past && goingUp){ nav.classList.add('show'); nav.classList.remove('hide'); }
-  else { nav.classList.remove('show'); nav.classList.add('hide'); }
+  
+  if(past && (goingUp || window.innerWidth <= 600)){
+    nav.classList.add('show'); nav.classList.remove('hide');
+  } else if (!past) {
+    nav.classList.remove('show'); nav.classList.add('hide');
+  }
+  
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(()=>{
+    if(past) { nav.classList.add('show'); nav.classList.remove('hide'); }
+  }, 1200);
+  
   lastScroll = h.scrollTop;
 });
 

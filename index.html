@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Our Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress"></div>
+<nav id="nav">
+  <a href="#story">Our Story</a><a href="#memories">Memories</a><a href="#letter">Letter</a><a href="#surprise">Surprise</a>
+</nav>
+<button id="music-btn" aria-label="Toggle music">🎵</button>
+<div id="music-label">Playing our song ❤️</div>
+
+<!-- OPENING -->
+<section id="opening">
+  <div class="heart" style="top:12%; left:10%; font-size:28px;">❤️</div>
+  <div class="heart" style="top:70%; left:82%; font-size:22px; animation-delay:2s;">🤍</div>
+  <div class="heart" style="top:30%; left:85%; font-size:18px; animation-delay:4s;">✨</div>
+  <div>
+    <h1>FOR MY FAVORITE PERSON ❤️</h1>
+    <p>Some stories are written&nbsp;— <br>ours is made of memories.</p>
+    <div class="start"><button class="btn" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Start Our Story →</button></div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section id="story" class="section">
+  <div class="container">
+    <div class="head reveal">
+      <h2>Our Story</h2>
+      <p class="sub">Before we knew where this story would take us...</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+
+    <div class="head reveal" style="margin-top:100px;">
+      <h2 style="font-size:28px;">The Little Things</h2>
+    </div>
+    <div class="grid-cards reveal" id="little-things"></div>
+
+    <div class="head reveal" style="margin-top:100px;">
+      <h2>Today</h2>
+    </div>
+    <div class="reveal" style="text-align:center;">
+      <div class="today-photo"></div>
+      <p style="font-family:var(--serif); font-style:italic; font-size:20px; color:var(--burgundy-soft);">And after all these moments... here we are.<br>And I still want to create many more with you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+<section id="memories" class="section">
+  <div class="container" style="max-width:920px;">
+    <div class="head reveal">
+      <h2>Our Memories</h2>
+      <p class="sub">A collection of little moments that mean everything to me.</p>
+    </div>
+    <div class="filters reveal" id="filters"></div>
+    <div class="masonry reveal" id="gallery"></div>
+  </div>
+</section>
+
+<!-- THINGS TO REMEMBER -->
+<section id="remember-section" class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="head reveal"><h2 style="font-size:28px;">Things I Never Want to Forget</h2></div>
+    <div class="grid-cards reveal" id="remember"></div>
+  </div>
+</section>
+
+<!-- COUNTER -->
+<section id="counter" class="section">
+  <div class="container reveal">
+    <div class="head"><h2 style="font-size:26px;">We've Been Making Memories For...</h2></div>
+    <div class="glass" id="glass"></div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section id="letter" class="section">
+  <div class="container">
+    <div class="head reveal">
+      <h2>A Letter For You</h2>
+      <p class="sub">There are some things I can't fit into photographs.</p>
+    </div>
+    <div class="envelope reveal" id="envelope" onclick="openLetter()">
+      <svg viewBox="0 0 300 200" fill="none">
+        <rect x="10" y="20" width="280" height="170" rx="14" fill="#3A2430"/>
+        <path d="M10 30 L150 130 L290 30" stroke="#C9A15E" stroke-width="3" fill="none"/>
+        <rect x="10" y="20" width="280" height="170" rx="14" stroke="#C9A15E" stroke-width="2"/>
+      </svg>
+      <p style="text-align:center; margin-top:16px; font-family:var(--serif); font-style:italic; color:#f4e9ee;">Open My Letter 💌</p>
+    </div>
+    <div id="letter-content"></div>
+  </div>
+</section>
+
+<!-- SURPRISE -->
+<section id="surprise">
+  <div id="lines">
+    <p class="line">But...</p>
+    <p class="line">Our story isn't finished yet.</p>
+    <p class="line">There's one more memory waiting for us.</p>
+    <p class="line">Are you ready? ❤️</p>
+  </div>
+  <button class="btn btn-gold reveal-btn" id="reveal-btn" onclick="openSurprisePage()">Open Your Surprise 🎁</button>
+</section>
+
+<footer>Made with ❤️ — just for us.</footer>
+
+<!-- SEPARATE SURPRISE PAGE -->
+<div id="surprise-page">
+  <div class="sp-field"></div>
+  <div class="sp-inner">
+    <div id="gift" onclick="openGift()">
+      <svg viewBox="0 0 100 100" fill="none">
+        <rect x="15" y="40" width="70" height="50" rx="4" fill="#9A3F5C"/>
+        <rect x="10" y="30" width="80" height="16" rx="3" fill="#C9A15E"/>
+        <rect x="46" y="30" width="8" height="60" fill="#C9A15E"/>
+        <path d="M50 30 C30 10 15 20 30 32 Z" fill="#C9A15E"/>
+        <path d="M50 30 C70 10 85 20 70 32 Z" fill="#C9A15E"/>
+      </svg>
+      <p class="tap-hint">tap to open</p>
+    </div>
+    <div id="choice-step">
+      <h3 class="choice-title">You pick tonight's movie 🎬</h3>
+      <p class="choice-sub">Choose whatever you're in the mood for.</p>
+      <div class="movie-grid" id="movie-grid"></div>
+      <h3 class="choice-title" style="margin-top:34px;">And where should we watch it? 📍</h3>
+      <div class="cinema-list" id="cinema-list"></div>
+      <button class="btn btn-gold" id="confirm-btn" onclick="confirmChoice()">Confirm & Reveal Ticket →</button>
+    </div>
+    <div id="ticket-wrap">
+      <div class="ticket">
+        <div class="ticket-seal">💌</div>
+        <div class="top">🎬 our next memory</div>
+        <h3>Movie Date</h3>
+        <div class="row"><span>Movie</span><strong id="t-movie">[Movie Name]</strong></div>
+        <div class="row"><span>📅 Date</span><strong id="t-date">[Date]</strong></div>
+        <div class="row"><span>🕐 Time</span><strong id="t-time">[Time]</strong></div>
+        <div class="row"><span>📍 Cinema</span><strong id="t-cinema">[Cinema]</strong></div>
+        <div class="row"><span>🍿 Tickets</span><strong>2</strong></div>
+        <div class="perf"></div>
+        <p class="ticket-note">Just you, me, a movie, and another memory to keep forever. ❤️</p>
+        <div class="barcode"></div>
+      </div>
+    </div>
+    <div id="final-msg">
+      <div class="glow">❤️</div>
+      <h2>Happy Anniversary</h2>
+      <p>Let's make this one unforgettable. See you at the movies. 🍿🎬</p>
+      <div class="deco">✨ ❤️ ✨</div>
+    </div>
+  </div>
+</div>
+
+<div id="modal"><button id="modal-close" onclick="closeModal()">×</button><div class="modal-box" id="modal-box"></div></div>
+<audio id="audio" src="music/our-song.mp3" loop></audio>
+
+<script src="script.js" defer></script>
+</body>
+
+</html>
